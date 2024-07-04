@@ -37,16 +37,6 @@ public class PostServiceImpl implements PostService {
 		return new PostResponseDto(post);
 	}
 
-	@Override
-	public Page<PostResponseDto> getPosts(Pageable pageable) {
-		return postRepository.findAll(pageable).map(PostResponseDto::new);
-	}
-
-	@Override
-	public PostResponseDto getPost(Long id) {
-		Post post = postRepository.findById(id).orElseThrow(() -> new PostNotFoundException("Post not found"));
-		return new PostResponseDto(post);
-	}
 
 	@Override
 	@Transactional
@@ -61,17 +51,4 @@ public class PostServiceImpl implements PostService {
 		return new PostResponseDto(post);
 	}
 
-	@Override
-	@Transactional
-	public void deletePost(Long id, Long userId) {
-		User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found."));
-
-		Post post = postRepository.findById(id).orElseThrow(() -> new PostNotFoundException("Post not found"));
-
-		if (!(Objects.equals(post.getUser().getId(), user.getId()))) {
-			throw new SecurityException("You are not authorized to delete this post");
-		}
-
-		user.removePost(post);
-	}
 }
