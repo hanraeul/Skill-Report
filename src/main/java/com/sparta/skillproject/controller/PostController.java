@@ -29,14 +29,6 @@ public class PostController {
 		return SuccessResponseFactory.ok(responseDto);
 	}
 
-	// 선택 게시글 조회
-	@GetMapping("/{postId}")
-	public ResponseEntity<?> getPost(@PathVariable Long postId) {
-		PostResponseDto responseDto = postService.getPost(postId);
-		return SuccessResponseFactory.ok(responseDto);
-	}
-
-
 	// 선택 게시글 수정
 	@PutMapping("/{postId}")
 	public ResponseEntity<?> updatePost(@PathVariable Long postId, @RequestBody PostRequestDto requestDto,
@@ -45,6 +37,5 @@ public class PostController {
 		PostResponseDto responseDto = postService.updatePost(postId, requestDto, userId);
 		return SuccessResponseFactory.ok(responseDto);
 	}
-
 
 }
