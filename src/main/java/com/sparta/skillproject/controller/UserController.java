@@ -27,26 +27,4 @@ public class UserController {
 		return SuccessResponseFactory.ok();
 	}
 
-	@GetMapping
-	public ResponseEntity<?> getUser(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-		UserResponseDto userInfo = userService.getUser(userDetails);
-		return SuccessResponseFactory.ok(userInfo);
-	}
-
-	@PutMapping
-	public ResponseEntity<?> editUser(@RequestBody @Valid UserRequestDto.EditInfo requestDto,
-										  @AuthenticationPrincipal UserDetailsImpl userDetails) {
-
-		UserResponseDto editUserInfo = userService.editUser(requestDto, userDetails);
-		return SuccessResponseFactory.ok(editUserInfo);
-	}
-
-	@DeleteMapping
-	public ResponseEntity<SuccessResponse<Void>> withdraw(@RequestBody @Valid UserRequestDto.Withdrawal requestDto,
-														  @AuthenticationPrincipal UserDetailsImpl userDetails) {
-
-		userService.withdraw(requestDto, userDetails);
-		return SuccessResponseFactory.ok();
-	}
-
 }

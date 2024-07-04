@@ -40,25 +40,6 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<Post> posts = new ArrayList<>();
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private final List<UserPasswordRecord> passwordRecords = new ArrayList<>();
-
-
-
-	//회원 정보 수정
-	public void editInfo(String nickname, String introduce) {
-		this.nickname = nickname;
-		this.introduce = introduce;
-	}
-	// 비밀 번호 변경
-	public void ChangePassword(String password) {
-		this.password = password;
-	}
-	//회원 탈퇴
-	public void updateRole(UserRole role) {
-		this.role = role;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		User user = (User)obj;
@@ -75,17 +56,5 @@ public class User {
 		posts.remove(post);
 		post.setUser(null);
 	}
-
-	public void addPasswordRecord(UserPasswordRecord record) {
-		this.passwordRecords.add(record);
-		record.setUser(this);
-	}
-
-	public void removePasswordRecord(UserPasswordRecord record) {
-		this.passwordRecords.remove(record);
-		record.setUser(null);
-	}
-
-
 
 }
